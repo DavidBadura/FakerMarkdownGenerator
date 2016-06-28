@@ -1,0 +1,27 @@
+{
+    "name": "davidbadura/faker-markdown-generator",
+    "description": "Faker Markdown Generator",
+    "keywords": [
+        "markdown",
+        "faker",
+        "generator"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "DavidBadura",
+            "email": "d.badura@gmx.de"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "fzaninotto/faker": "^1.6",
+        "davidbadura/markdown-builder": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "DavidBadura\\FakerMarkdownGenerator\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
