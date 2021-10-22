@@ -25,7 +25,7 @@ class FakerProvider extends Lorem
             }
 
             if (self::randomDigit() > 3) {
-                $parts[] = self::markdownBlockqoute();
+                $parts[] = self::markdownBlockquote();
             }
 
             if (self::randomDigit() > 3) {
@@ -84,9 +84,9 @@ class FakerProvider extends Lorem
      * @param int $maxNbChars
      * @return string
      */
-    public static function markdownBlockqoute($maxNbChars = 200)
+    public static function markdownBlockquote($maxNbChars = 200)
     {
-        return (new MarkdownBuilder())->blockqoute(self::text($maxNbChars))->getMarkdown();
+        return (new MarkdownBuilder())->blockquote(self::text($maxNbChars))->getMarkdown();
     }
 
     /**
