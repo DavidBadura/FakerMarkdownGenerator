@@ -90,6 +90,17 @@ class FakerProvider extends Lorem
     }
 
     /**
+     * @param int $maxNbChars
+     * @return string
+     *
+     * @deprecated use markdownBlockquote
+     */
+    public static function markdownBlockqoute($maxNbChars = 200)
+    {
+        return self::markdownBlockquote($maxNbChars);
+    }
+
+    /**
      * @param int $nb
      * @return string
      */

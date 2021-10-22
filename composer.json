@@ -9,14 +9,14 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "DavidBadura",
-            "email": "d.badura@gmx.de"
+            "name": "David Badura",
+            "email": "david.badura@patchlevel.de"
         }
     ],
     "require": {
         "php": ">=5.4.0",
         "fakerphp/faker": "^1.6",
-        "davidbadura/markdown-builder": "^1.0"
+        "davidbadura/markdown-builder": "^1.0.4"
     },
     "autoload": {
         "psr-4": {
