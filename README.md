@@ -10,7 +10,7 @@ Installation
 Add the FakerMarkdownGenerator library to your `composer.json` file:
 
 ```
-composer require davidbadura/faker-markdown-generator
+composer require --dev davidbadura/faker-markdown-generator
 ```
 
 Usage
