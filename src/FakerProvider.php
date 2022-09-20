@@ -1,19 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DavidBadura\FakerMarkdownGenerator;
 
 use DavidBadura\MarkdownBuilder\MarkdownBuilder;
 use Faker\Provider\Lorem;
+use InvalidArgumentException;
 
-/**
- * @author David Badura <d.a.badura@gmail.com>
- */
 class FakerProvider extends Lorem
 {
-    /**
-     * @return string
-     */
-    public static function markdown()
+    public static function markdown(): string
     {
         $parts = [];
 
@@ -41,128 +38,87 @@ class FakerProvider extends Lorem
         return implode("\n\n", $parts);
     }
 
-    /**
-     * @param int $maxNbChars
-     * @return string
-     */
-    public static function markdownP($maxNbChars = 200)
+    public static function markdownP(int $maxNbChars = 200): string
     {
         return (new MarkdownBuilder())->p(self::text($maxNbChars))->getMarkdown();
     }
 
-    /**
-     * @param int $nbWords
-     * @param bool $variableNbWords
-     * @return string
-     */
-    public static function markdownH1($nbWords = 6, $variableNbWords = true)
+    public static function markdownH1(int $nbWords = 6, bool $variableNbWords = true): string
     {
         return (new MarkdownBuilder())->h1(self::sentence($nbWords, $variableNbWords))->getMarkdown();
     }
 
-    /**
-     * @param int $nbWords
-     * @param bool $variableNbWords
-     * @return string
-     */
-    public static function markdownH2($nbWords = 6, $variableNbWords = true)
+    public static function markdownH2(int $nbWords = 6, bool $variableNbWords = true): string
     {
         return (new MarkdownBuilder())->h2(self::sentence($nbWords, $variableNbWords))->getMarkdown();
     }
 
-    /**
-     * @param int $nbWords
-     * @param bool $variableNbWords
-     * @return string
-     */
-    public static function markdownH3($nbWords = 6, $variableNbWords = true)
+    public static function markdownH3(int $nbWords = 6, bool $variableNbWords = true): string
     {
         return (new MarkdownBuilder())->h3(self::sentence($nbWords, $variableNbWords))->getMarkdown();
     }
 
-    /**
-     * @param int $maxNbChars
-     * @return string
-     */
-    public static function markdownBlockquote($maxNbChars = 200)
+    public static function markdownBlockquote(int $maxNbChars = 200): string
     {
         return (new MarkdownBuilder())->blockquote(self::text($maxNbChars))->getMarkdown();
     }
 
     /**
-     * @param int $maxNbChars
-     * @return string
-     *
      * @deprecated use markdownBlockquote
      */
-    public static function markdownBlockqoute($maxNbChars = 200)
+    public static function markdownBlockqoute(int $maxNbChars = 200): string
     {
         return self::markdownBlockquote($maxNbChars);
     }
 
-    /**
-     * @param int $nb
-     * @return string
-     */
-    public static function markdownBulletedList($nb = 3)
+    public static function markdownBulletedList(int $nb = 3): string
     {
-        return (new MarkdownBuilder())->bulletedList(self::sentences($nb))->getMarkdown();
+        $list = self::sentences($nb);
+
+        if (!is_array($list)) {
+            throw new InvalidArgumentException('faker "sentences" should return an array');
+        }
+
+        return (new MarkdownBuilder())->bulletedList($list)->getMarkdown();
     }
 
-    /**
-     * @param int $nb
-     * @return string
-     */
-    public static function markdownNumberedList($nb = 3)
+    public static function markdownNumberedList(int $nb = 3): string
     {
-        return (new MarkdownBuilder())->numberedList(self::sentences($nb))->getMarkdown();
+        $list = self::sentences($nb);
+
+        if (!is_array($list)) {
+            throw new InvalidArgumentException('faker "sentences" should return an array');
+        }
+
+        return (new MarkdownBuilder())->numberedList($list)->getMarkdown();
     }
 
-    /**
-     * @param int $maxNbChars
-     * @return string
-     */
-    public static function markdownCode($maxNbChars = 200)
+    public static function markdownCode(int $maxNbChars = 200): string
     {
         return (new MarkdownBuilder())->code(self::text($maxNbChars))->getMarkdown();
     }
 
-    /**
-     * @return string
-     */
-    public static function markdownInlineCode()
+    public static function markdownInlineCode(): string
     {
         return (new MarkdownBuilder())->inlineCode(self::word());
     }
 
-    /**
-     * @return string
-     */
-    public static function markdownInlineItalic()
+    public static function markdownInlineItalic(): string
     {
         return (new MarkdownBuilder())->inlineItalic(self::word());
     }
 
-    /**
-     * @return string
-     */
-    public static function markdownInlineBold()
+    public static function markdownInlineBold(): string
     {
         return (new MarkdownBuilder())->inlineBold(self::word());
     }
 
-    /**
-     * @return string
-     */
-    public static function markdownInlineLink()
+    public static function markdownInlineLink(): string
     {
         return (new MarkdownBuilder())->inlineLink('http://google.com', self::word());
     }
 
-    /**
-     * @return string
-     */
-    public static function markdownInlineImg()
+    public static function markdownInlineImg(): string
     {
         return (new MarkdownBuilder())->inlineImg(
             'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Einstein_1921_portrait2.jpg/800px-Einstein_1921_portrait2.jpg',
